@@ -1,0 +1,51 @@
+/* Reset default browser spacing */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Center the form on the page */
+.email-form {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Header text */
+.email-form h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Email input box */
+.email-form input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Submit button */
+.email-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Button hover effect */
+.email-form button:hover {
+    background-color: #0056b3;
+}
