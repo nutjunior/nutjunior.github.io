@@ -25,5 +25,13 @@
         Thanks! You’re on the list.
         </p>
     </form>
+<script>
+  const form = document.querySelector('.email-form');
+  const successMessage = document.getElementById('success-message');
+
+  form.addEventListener('submit', function () {
+    successMessage.style.display = 'block';
+  });
+</script>
 </body>
 </html>
