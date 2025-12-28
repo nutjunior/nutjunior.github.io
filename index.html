@@ -7,44 +7,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form
-        id="subscribe-form"
-        action="https://docs.google.com/forms/d/e/1FAIpQLSdVWIsWwwAjBcphMfaan7E3IR8p_Jbtm7sFJRr_YOzMRRuGIA/formResponse"
-        method="POST"
-        target="hidden_iframe"
-        onsubmit="showSuccess()"
-    >
-        <h1>Enter your email</h1>
+    <form id="subscribe-form">
+  <h1>Enter your email</h1>
+  <input type="email" name="email" placeholder="you@example.com" required>
+  <button type="submit">Submit</button>
+  <p id="success-message" style="display:none;">Thanks! You’re on the list.</p>
+</form>
 
-        <!-- CORRECT FIELD ID -->
-        <input
-            type="email"
-            name="entry.572472138"
-            placeholder="you@example.com"
-            required
-        >
+<script>
+const form = document.getElementById("subscribe-form");
+const successMessage = document.getElementById("success-message");
 
-        <!-- CORRECT FIELD ID -->
-        <input
-            type="hidden"
-            name="entry.1983973473"
-            value="TRUE"
-        >
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = form.email.value;
 
-        <button type="submit">Submit</button>
-
-        <p id="success-message" style="display:none;">
-            Thanks! You’re on the list.
-        </p>
-    </form>
-
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
-
-    <script>
-    function showSuccess() {
-        document.getElementById("success-message").style.display = "block";
-        document.getElementById("subscribe-form").reset();
-    }
-    </script>
+  try {
+    await fetch("YOUR_WEB_APP_URL_HERE", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({email})
+    });
+    successMessage.style.display = "block";
+    form.reset();
+  } catch (err) {
+    alert("Error submitting. Please try again.");
+    console.error(err);
+  }
+});
+</script>
 </body>
 </html>
