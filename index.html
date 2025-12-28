@@ -30,20 +30,27 @@
 const form = document.getElementById("subscribe-form");
 const successMessage = document.getElementById("success-message");
 
-form.addEventListener("submit", function(e){
-    e.preventDefault(); // prevent default form submission
-    const email = form.email.value;
+form.addEventListener("submit", async function(e){
+    e.preventDefault();
 
-    // Send email to Apps Script Web App
-    fetch("https://script.google.com/macros/s/AKfycbx0Fe-SKdMm6SlKoxMakgYQDBBqizuMQsY8k-T_02yrWRsfviOAaI5MrwS0Zuolv_4W/exec", {
-        method: "POST",
-        body: JSON.stringify({email}),
-        headers: {"Content-Type": "application/json"}
-    }).then(() => {
-        successMessage.style.display = "block";
-        form.reset();
-    }).catch(err => alert("Error submitting. Please try again."));
+    const email = form.querySelector("[type='email']").value;
+
+    const result = await fetch(
+        "https://script.google.com/macros/s/AKfycbx0Fe-SKdMm6SlKoxMakgYQDBBqizuMQsY8k-T_02yrWRsfviOAaI5MrwS0Zuolv_4W/exec",
+        {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                action: "subscribe",
+                email: email
+            })
+        }
+    );
+
+    successMessage.style.display = "block";
+    form.reset();
 });
 </script>
+
 </body>
 </html>
