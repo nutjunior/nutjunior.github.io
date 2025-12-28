@@ -1,4 +1,4 @@
-/* Reset default browser spacing */
+/* Reset default browser layout */
 body {
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Center the form on the page */
+/* Center form on page */
 .email-form {
     max-width: 400px;
     margin: 100px auto;
@@ -48,4 +48,10 @@ body {
 /* Button hover effect */
 .email-form button:hover {
     background-color: #0056b3;
+
+#success-message {
+    margin-top: 16px;
+    color: #28a745;
+    font-size: 14px;
+}
 }
