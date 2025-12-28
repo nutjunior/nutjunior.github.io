@@ -7,50 +7,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form id="subscribe-form">
-        <h1>Enter your email</h1>
-        <input
-            type="email"
-            name="entry.297395942"
-            placeholder="you@example.com"
-            required
-        >
-        <input
-            type="hidden"
-            name="entry.2086945434"
-            value="TRUE"
-        >
-        <button type="submit">Submit</button>
-        <p id="success-message" style="display:none;">
-            Thanks! You’re on the list.
-        </p>
-    </form>
+    <form
+    id="subscribe-form"
+    action="https://docs.google.com/forms/d/e/1FAIpQLSdVWIsWwwAjBcphMfaan7E3IR8p_Jbtm7sFJRr_YOzMRRuGIA/formResponse"
+    method="POST"
+    target="hidden_iframe"
+    onsubmit="showSuccess()"
+>
+    <h1>Enter your email</h1>
+
+    <input
+        type="email"
+        name="entry.297395942"
+        placeholder="you@example.com"
+        required
+    >
+
+    <input
+        type="hidden"
+        name="entry.2086945434"
+        value="TRUE"
+    >
+
+    <button type="submit">Submit</button>
+
+    <p id="success-message" style="display:none;">
+        Thanks! You’re on the list.
+    </p>
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 <script>
-const form = document.getElementById("subscribe-form");
-const successMessage = document.getElementById("success-message");
-
-form.addEventListener("submit", async function(e){
-    e.preventDefault();
-
-    const email = form.querySelector("[type='email']").value;
-
-    const result = await fetch(
-        "https://docs.google.com/forms/d/e/1FAIpQLSdVWIsWwwAjBcphMfaan7E3IR8p_Jbtm7sFJRr_YOzMRRuGIA/respondform?usp=header",
-        {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                action: "subscribe",
-                email: email
-            })
-        }
-    );
-
-    successMessage.style.display = "block";
-    form.reset();
-});
+function showSuccess() {
+    document.getElementById("success-message").style.display = "block";
+    document.getElementById("subscribe-form").reset();
+}
 </script>
-
 </body>
 </html>
