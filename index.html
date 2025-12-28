@@ -7,32 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
-    <form
-      class="email-form"
-      action="https://docs.google.com/forms/d/e/1FAIpQLSdVWIsWwwAjBcphMfaan7E3IR8p_Jbtm7sFJRr_YOzMRRuGIA/formResponse?usp=dialog"
-      method="POST"
-      target="hidden_iframe"
-    >
+    <form id="subscribe-form">
         <h1>Enter your email</h1>
         <input
-          type="email"
-          name="entry.572472138"
-          placeholder="you@example.com"
-          required
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            required
         >
         <button type="submit">Submit</button>
         <p id="success-message" style="display:none;">
-        Thanks! You’re on the list.
+            Thanks! You’re on the list.
         </p>
     </form>
-<script>
-  const form = document.querySelector('.email-form');
-  const successMessage = document.getElementById('success-message');
 
-  form.addEventListener('submit', function () {
-    successMessage.style.display = 'block';
-  });
+<script>
+const form = document.getElementById("subscribe-form");
+const successMessage = document.getElementById("success-message");
+
+form.addEventListener("submit", function(e){
+    e.preventDefault(); // prevent default form submission
+    const email = form.email.value;
+
+    // Send email to Apps Script Web App
+    fetch("https://script.google.com/macros/s/AKfycbx0Fe-SKdMm6SlKoxMakgYQDBBqizuMQsY8k-T_02yrWRsfviOAaI5MrwS0Zuolv_4W/exec", {
+        method: "POST",
+        body: JSON.stringify({email}),
+        headers: {"Content-Type": "application/json"}
+    }).then(() => {
+        successMessage.style.display = "block";
+        form.reset();
+    }).catch(err => alert("Error submitting. Please try again."));
+});
 </script>
 </body>
 </html>
