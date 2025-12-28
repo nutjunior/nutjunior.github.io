@@ -1,47 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email List Sign-Up</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <form id="subscribe-form">
-  <h1>Enter your email</h1>
-  <input type="email" name="email" placeholder="you@example.com" required>
-  <button type="submit">Submit</button>
-  <p id="success-message" style="display:none;">Thanks! You’re on the list.</p>
-</form>
-
 <form id="subscribe-form">
-  <h1>Enter your email</h1>
+  <h1>Subscribe to our mailing list</h1>
   <input type="email" name="email" placeholder="you@example.com" required>
-  <button type="submit">Submit</button>
-  <p id="success-message" style="display:none;">Thanks! You’re on the list.</p>
+  <button type="submit">Subscribe</button>
+  <p id="subscribe-success" style="display:none; color:green;">
+    Thanks! You’re on the list.
+  </p>
+  <p id="subscribe-error" style="display:none; color:red;">
+    Error submitting. Please try again.
+  </p>
 </form>
 
 <script>
 const form = document.getElementById("subscribe-form");
-const successMessage = document.getElementById("success-message");
+const successMsg = document.getElementById("subscribe-success");
+const errorMsg = document.getElementById("subscribe-error");
+
+// Replace with your deployed Web App URL
+const WEB_APP_URL = "YOUR_WEB_APP_URL_HERE";
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const email = form.email.value;
+  successMsg.style.display = "none";
+  errorMsg.style.display = "none";
+
+  const email = form.email.value.trim();
 
   try {
-    await fetch("https://script.google.com/macros/s/AKfycbx_u0GC5EYI6sw2MuzTXxHfDWOzedErNkkxgZbx6tWihThpdcfU8kzy94opCJ9HA3zA/exec", {
+    const res = await fetch(WEB_APP_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({email})
+      body: JSON.stringify({email: email, action: "subscribe"})
     });
-    successMessage.style.display = "block";
-    form.reset();
+
+    if (res.ok) {
+      successMsg.style.display = "block";
+      form.reset();
+    } else {
+      errorMsg.style.display = "block";
+    }
   } catch (err) {
-    alert("Error submitting. Please try again.");
     console.error(err);
+    errorMsg.style.display = "block";
   }
 });
 </script>
-</body>
-</html>
