@@ -8,41 +8,43 @@
 </head>
 <body>
     <form
-    id="subscribe-form"
-    action="https://docs.google.com/forms/d/e/1FAIpQLSdVWIsWwwAjBcphMfaan7E3IR8p_Jbtm7sFJRr_YOzMRRuGIA/formResponse"
-    method="POST"
-    target="hidden_iframe"
-    onsubmit="showSuccess()"
->
-    <h1>Enter your email</h1>
-
-    <input
-        type="email"
-        name="entry.297395942"
-        placeholder="you@example.com"
-        required
+        id="subscribe-form"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSdVWIsWwwAjBcphMfaan7E3IR8p_Jbtm7sFJRr_YOzMRRuGIA/formResponse"
+        method="POST"
+        target="hidden_iframe"
+        onsubmit="showSuccess()"
     >
+        <h1>Enter your email</h1>
 
-    <input
-        type="hidden"
-        name="entry.2086945434"
-        value="TRUE"
-    >
+        <!-- CORRECT FIELD ID -->
+        <input
+            type="email"
+            name="entry.572472138"
+            placeholder="you@example.com"
+            required
+        >
 
-    <button type="submit">Submit</button>
+        <!-- CORRECT FIELD ID -->
+        <input
+            type="hidden"
+            name="entry.1983973473"
+            value="TRUE"
+        >
 
-    <p id="success-message" style="display:none;">
-        Thanks! You’re on the list.
-    </p>
-</form>
+        <button type="submit">Submit</button>
 
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+        <p id="success-message" style="display:none;">
+            Thanks! You’re on the list.
+        </p>
+    </form>
 
-<script>
-function showSuccess() {
-    document.getElementById("success-message").style.display = "block";
-    document.getElementById("subscribe-form").reset();
-}
-</script>
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+    <script>
+    function showSuccess() {
+        document.getElementById("success-message").style.display = "block";
+        document.getElementById("subscribe-form").reset();
+    }
+    </script>
 </body>
 </html>
