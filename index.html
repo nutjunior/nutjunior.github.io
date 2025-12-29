@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="en">
 <head>
-  <title>
-    Sign up page
-  </title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up page</title>
 </head>
+<body>
+
 <form id="subscribe-form">
   <h1>Subscribe to our mailing list</h1>
   <input type="email" name="email" placeholder="you@example.com" required>
   <button type="submit">Subscribe</button>
+
   <p id="subscribe-success" style="display:none; color:green;">
     Thanks! You’re on the list.
   </p>
@@ -28,26 +29,38 @@ const errorMsg = document.getElementById("subscribe-error");
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxFi4DqIScVnYntEz_i88EPujz2MW6t5tnkiq3JhnvMvbHbWNuHdP8TlrUv07GanGPc/exec";
 
 form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  e.preventDefault(); // prevent default GET submission
   successMsg.style.display = "none";
   errorMsg.style.display = "none";
 
   const email = form.email.value.trim();
 
-try {
-  const formData = new URLSearchParams();
-  formData.append("email", email);
-  formData.append("action", "subscribe");
+  try {
+    const formData = new URLSearchParams();
+    formData.append("email", email);
+    formData.append("action", "subscribe");
 
-  const res = await fetch(WEB_APP_URL, {
-    method: "POST",
-    body: formData
-  });
-  
-} catch (err) {
-  console.error(err);
-}
+    const res = await fetch(WEB_APP_URL, {
+      method: "POST",
+      body: formData
+    });
 
+    const text = await res.text();
+
+    // Simple success detection
+    if (text.includes("success")) {
+      successMsg.style.display = "block";
+      form.reset();
+    } else {
+      errorMsg.style.display = "block";
+    }
+
+  } catch (err) {
+    console.error(err);
+    errorMsg.style.display = "block";
+  }
+});
 </script>
+
 </body>
 </html>
