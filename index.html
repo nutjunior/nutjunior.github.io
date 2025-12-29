@@ -34,24 +34,20 @@ form.addEventListener("submit", async (e) => {
 
   const email = form.email.value.trim();
 
-  try {
-    const res = await fetch(WEB_APP_URL, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({email: email, action: "subscribe"})
-    });
+try {
+  const formData = new URLSearchParams();
+  formData.append("email", email);
+  formData.append("action", "subscribe");
 
-    if (res.ok) {
-      successMsg.style.display = "block";
-      form.reset();
-    } else {
-      errorMsg.style.display = "block";
-    }
-  } catch (err) {
-    console.error(err);
-    errorMsg.style.display = "block";
-  }
-});
+  const res = await fetch(WEB_APP_URL, {
+    method: "POST",
+    body: formData
+  });
+  
+} catch (err) {
+  console.error(err);
+}
+
 </script>
 </body>
 </html>
